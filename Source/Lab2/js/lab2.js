@@ -1,15 +1,5 @@
-/*var map;
-function initMap() {
-    map = new google.maps.Map(document.getElementById('map-canvas'), {
-        center: {lat: 39.0997, lng: -94.5786},
-        zoom: 8
-    });
-}*/
-
-
-
-angular.module('GoogleDirection', [])
-    .controller('googlemapoutput', function ($scope) {
+angular.module('GoogleDirectionWeather', [])
+    .controller('googlemapoutput', function ($scope, $http) {
 
         var map;
         var mapOptions;
@@ -47,65 +37,50 @@ angular.module('GoogleDirection', [])
                 }
 
             });
+
+            getWeather(autocomplete);
+            getWeather(autocomplete2);
         };
 
         google.maps.event.addDomListener(window, 'load', $scope.initialize);
 
+        getWeather = function(ac) {
+            var place = ac.getPlace();
+            place.address_components.forEach(function(element) {
+                if (element.types[0] === "locality") {
+                    city = element.long_name;
+                }
+                if (element.types[0] === 'administrative_area_level_1') {
+                    state = element.short_name;
+                }
+            });
+            $scope.weatherInfo = [];
+            var url = "https://api.wunderground.com/api/36b799dc821d5836/conditions/q/" + state + "/" + city + ".json";
+            $http.get(url).success(function(data) {
+                console.log(data);
+                $scope.opening = "Weather for";
+                $scope.temp = data.current_observation.temp_f + "° F";
+                $scope.icon = data.current_observation.icon_url;
+                $scope.weather = "(" + data.current_observation.weather + ")";
+                $scope.city = data.current_observation.display_location.city;
+                $scope.state_name = data.current_observation.display_location.state_name;
+
+                $scope.weatherInfo.push(
+                    {
+                        opening: "Weather for", temp: data.current_observation.temp_f + "° F",
+                        icon: data.current_observation.icon_url, weather: "(" + data.current_observation.weather + ")",
+                        city: data.current_observation.display_location.city, state_name: data.current_observation.display_location.state_name
+                    });
+            })
+        }
     });
 
 var autocomplete;
-var citystate = {
-    locality: 'long-name',
-    administrative_area_level_1: 'short-name'
-};
-function initAutocomplete() {(
+var autocomplete2;
+function initAutocomplete() {
+
     autocomplete = new google.maps.places.Autocomplete(document.getElementById('startlocation')),
-        {types: ['geocode']});
-     //autocomplete.addListener('place_changed', populateAddress);
-
-//function populateAddress() {
-    // var place = autocomplete.getPlace();
-    //  for (var component in citystate) {
-    //      document.getElementById(component).value = '';
-    //      document.getElementById(component).disabled = false;
-    //  }
-    //
-    // for (var i = 0; i < place.address_components.length; i++) {
-    //      var addressType = place.address_components[i].types[0];
-    //      if (citystate[addressType]) {
-    //          var val = place.address_components[i][citystate[addressType]];
-    //          document.getElementById(addressType).value = val;
-    //      }
-    //  }
-    //  console.log(place);
- }
-
-angular.module('weather', [])
-    .controller('weatherctrl', function($scope, $http) {
-
-        $scope.getWeather = function() {
-            var place = autocomplete.getPlace();
-            //var city = place.locality;
-            //var state = place.administrative_area_level_1;
-            // var url = "https://api.wunderground.com/api/36b799dc821d5836/conditions/q/" + state + "/" + city + ".json";
-            var url = "https://api.wunderground.com/api/36b799dc821d5836/conditions/q/MO/Springfield.json";
-            $http.get(url).success(function(data) {
-                console.log(data);
-                temp = data.current_observation.temp_f;
-                icon = data.current_observation.icon_url;
-                weather = data.current_observation.weather;
-                console.log(temp);
-                $scope.currentweather = {
-                    html: "Currently " + temp + " &deg; F and " + weather + ""
-                }
-                $scope.currentIcon = {
-                    html: "<img src='" + icon + "'/>"
-                }
-                $scope.htmlTemp = temp;
-
-            })
-        }
-
-    });
-
-angular.module('combine', ['GoogleDirection', 'weather'])
+        {types: ['geocode']};
+    autocomplete2 = new google.maps.places.Autocomplete(document.getElementById('endlocation')),
+        {types: ['geocode']};
+}

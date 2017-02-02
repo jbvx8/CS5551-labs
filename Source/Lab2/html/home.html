@@ -1,22 +1,21 @@
 <!DOCTYPE html>
-
-<html lang="" data-ng-app="combine">
+<html lang="en" data-ng-app="GoogleDirectionWeather">
 <head>
-    <meta charset="UTF-8">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Directions</title>
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <!-- Jquery -->
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+    <!-- JQuery and Bootstrap-->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
     <!-- Angular JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js" type="application/javascript"></script>
-    <!-- Google maps api -->
-    <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmSL6ayla_w8OtZjp23pkRcKlGDLxrl-E&v=3.exp"></script>-->
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmSL6ayla_w8OtZjp23pkRcKlGDLxrl-E&libraries=places&callback=initAutocomplete"
             async defer></script>
@@ -25,40 +24,48 @@
     <link rel="stylesheet" href="../css/lab2style.css">
 </head>
 <body>
-<div class="container map-size" ng-controller="googlemapoutput">
-    <div class="row padding-20">
-        Start Location <input type="text"  ng-model="startlocation" id="startlocation"/>
-        End Location <input type="text"  ng-model="endlocation" id="endlocation"/>
-        <button id="btn" ng-click="calcRoute()" class="btn btn-default">
-            Get Directions
-        </button>
+<div class="container-fluid map-size" ng-controller="googlemapoutput">
+    <div class="row justify-content-start padding-20">
+        <div class="col-xs-1">
+            <label><h2>Start </h2></label>
+        </div>
+        <div class="col">
+            <input type="text"  ng-model="startlocation" id="startlocation"/>
+        </div>
+
+        <div class="col-xs-1">
+            <label><h2>End </h2></label>
+        </div>
+        <div class="col">
+            <input type="text"  ng-model="endlocation" id="endlocation"/>
+        </div>
+
+        <div class="col">
+            <button id="btn" ng-click="calcRoute()" class="btn btn-default">
+                Get Directions
+            </button>
+        </div>
+
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col"></div>
         <br/></br>
     </div>
-    <div id="map-canvas"></div>
-    <div ng-controller="weatherctrl">
-        <button id="btn2" ng-click="getWeather()"> Show Weather </button>
-        <br/>
-        <br/>
-        <div>
-            <h1>{{htmlTemp}}</h1>
-        </div>
-        <div class="weatherModule">
-            <p class="currentConditions" ng-bind-html-unsafe="currentweather.html"></p>
-            <div class="currentIcon" ng-bind-html-unsafe="currentIcon.html"></div>
+
+    <div class="row">
+        <div class="col-6" id="map-canvas"></div>
+        <div class="col">
+            <div class="row padding-20" ng-repeat="info in weatherInfo">
+                <div><h3>{{info.opening}} {{info.city}} {{info.state_name}}</h3>
+                    <h1>{{info.temp}} <img src="{{info.icon}}"/><span> {{info.weather}}</span></h1>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
-<!--<div ng-controller="weatherctrl">-->
-    <!--<button id="btn2" ng-click="getWeather()"> Show Weather </button>-->
-    <!--<br/>-->
-    <!--<br/>-->
-    <!--<div class="weatherModule">-->
-        <!--<p class="currentConditions" ng-bind-html-unsafe="currentweather.html"></p>-->
-        <!--<div class="currentIcon" ng-bind-html-unsafe="currentIcon.html"></div>-->
-    <!--</div>-->
-<!--</div>-->
-
 </body>
 </html>
+
+
 

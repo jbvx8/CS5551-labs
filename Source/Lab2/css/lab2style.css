@@ -24,19 +24,27 @@ html, body {
 }
 
 #map-canvas {
-    width: 650px;
-    height: 100%;
+    /*width: 650px;*/
+    height:650px;
+    top:0;
+    padding:0;
 }
 
 .map-size {
     height: 600px;
     width:100%;
 }
+.col:not(:first-child),.col:not(:last-child) {
+    padding-right:7px;
+    padding-left:7px;
+}
+
+
 
 /*.weatherModule {*/
-    /*background: #f2f2f2;*/
-    /*height: 150px;*/
-    /*width: 250px;*/
-    /*border: 1px dashed #ccc;*/
-    /*padding: 1em;*/
+/*background: #f2f2f2;*/
+/*height: 150px;*/
+/*width: 250px;*/
+/*border: 1px dashed #ccc;*/
+/*padding: 1em;*/
 /*}*/
