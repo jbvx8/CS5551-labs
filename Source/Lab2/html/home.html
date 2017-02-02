@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html lang="" data-ng-app="combine">
+<head>
+    <meta charset="UTF-8">
+    <title>Directions</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- Angular JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js" type="application/javascript"></script>
+    <!-- Google maps api -->
+    <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmSL6ayla_w8OtZjp23pkRcKlGDLxrl-E&v=3.exp"></script>-->
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmSL6ayla_w8OtZjp23pkRcKlGDLxrl-E&libraries=places&callback=initAutocomplete"
+            async defer></script>
+
+    <script src="../js/lab2.js"></script>
+    <link rel="stylesheet" href="../css/lab2style.css">
+</head>
+<body>
+<div class="container map-size" ng-controller="googlemapoutput">
+    <div class="row padding-20">
+        Start Location <input type="text"  ng-model="startlocation" id="startlocation"/>
+        End Location <input type="text"  ng-model="endlocation" id="endlocation"/>
+        <button id="btn" ng-click="calcRoute()" class="btn btn-default">
+            Get Directions
+        </button>
+        <br/></br>
+    </div>
+    <div id="map-canvas"></div>
+    <div ng-controller="weatherctrl">
+        <button id="btn2" ng-click="getWeather()"> Show Weather </button>
+        <br/>
+        <br/>
+        <div>
+            <h1>{{htmlTemp}}</h1>
+        </div>
+        <div class="weatherModule">
+            <p class="currentConditions" ng-bind-html-unsafe="currentweather.html"></p>
+            <div class="currentIcon" ng-bind-html-unsafe="currentIcon.html"></div>
+        </div>
+    </div>
+</div>
+
+<!--<div ng-controller="weatherctrl">-->
+    <!--<button id="btn2" ng-click="getWeather()"> Show Weather </button>-->
+    <!--<br/>-->
+    <!--<br/>-->
+    <!--<div class="weatherModule">-->
+        <!--<p class="currentConditions" ng-bind-html-unsafe="currentweather.html"></p>-->
+        <!--<div class="currentIcon" ng-bind-html-unsafe="currentIcon.html"></div>-->
+    <!--</div>-->
+<!--</div>-->
+
+</body>
+</html>
+
