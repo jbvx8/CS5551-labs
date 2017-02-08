@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+  <title>Login</title>
+
+
+  <link rel="stylesheet" href="app.css">
+
+  <meta name="google-signin-scope" content="profile email">
+  <meta name="google-signin-client_id" content="53820978680-v3lk5hjovj13csrmunrsj9mtvn23kffo.apps.googleusercontent.com">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <!--<script src="app.js"></script>-->
+</head>
+<body>
+<script>
+    function onSignIn(googleUser) {
+        // Useful data for your client-side scripts:
+        var profile = googleUser.getBasicProfile();
+        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+        console.log('Full Name: ' + profile.getName());
+        console.log('Given Name: ' + profile.getGivenName());
+        console.log('Family Name: ' + profile.getFamilyName());
+        console.log("Image URL: " + profile.getImageUrl());
+        console.log("Email: " + profile.getEmail());
+
+        // The ID token you need to pass to your backend:
+        var id_token = googleUser.getAuthResponse().id_token;
+        console.log("ID Token: " + id_token);
+
+        window.location.href = "secure.html";
+    };
+
+    function onFailure() {
+        console.log("login failure");
+    }
+</script>
+<div class="google g-signin2" data-onsuccess="onSignIn" data-onfailure="onFailure" data-theme="dark" data-width="300" data-longtitle="true"></div>
+
+
+
+
+
+
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+  -->
+
+
+
+</body>
+</html>

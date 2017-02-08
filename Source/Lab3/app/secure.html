@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Secure Page</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Image Search</h1>
+    <div>
+        <script>
+            (function() {
+                var cx = '014533240989500353965:6nvf0b7rp8s';
+                var gcse = document.createElement('script');
+                gcse.type = 'text/javascript';
+                gcse.async = true;
+                gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(gcse, s);
+
+
+                var service_url = 'https://kgsearch.googleapis.com/v1/entities:search';
+                var params = {
+                    'query': 'cat',
+                    'limit': 1,
+                    'indent': true,
+                    'key' : 'AIzaSyBXIgU_8ov_uiEpjBscNOr5axYwoyjr3yY',
+                };
+                $.getJSON(service_url + '?callback=?', params, function(response) {
+                    $.each(response.itemListElement, function(i, element) {
+                        $('<div>', {text:element['result']['detailedDescription']['articleBody']}).appendTo(document.body);
+                    });
+                });
+
+            })();
+
+
+        </script>
+
+        <gcse:search></gcse:search>
+
+        <!--<script>-->
+            <!--var service_url = 'https://kgsearch.googleapis.com/v1/entities:search';-->
+            <!--var params = {-->
+                <!--'query': s.query,-->
+                <!--'limit': 1,-->
+                <!--'indent': true,-->
+                <!--'key' : 'AIzaSyBXIgU_8ov_uiEpjBscNOr5axYwoyjr3yY',-->
+            <!--};-->
+            <!--$.getJSON(service_url + '?callback=?', params, function(response) {-->
+                <!--$.each(response.itemListElement, function(i, element) {-->
+                    <!--$('<div>', {text:element['result']['detailedDescription']['articleBody']}).appendTo(document.body);-->
+                <!--});-->
+            <!--});-->
+        <!--</script>-->
+    </div>
+
+</body>
+</html>
