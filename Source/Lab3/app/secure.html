@@ -4,11 +4,43 @@
     <meta charset="UTF-8">
     <title>Secure Page</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://cse.google.com/cse/cse.js"></script>
+    <!--<script src="https://apis.google.com/js/platform.js" async defer></script>-->
 </head>
 <body>
     <h1>Image Search</h1>
     <div>
         <script>
+            var myCallback = function() {
+                if (document.readyState == 'complete') {
+                    // Document is ready when CSE element is initialized.
+                    // Render an element with both search box and search results in div with id 'test'.
+                    google.search.cse.element.render(
+                        {
+                            div: "test",
+                            tag: 'search'
+                        });
+                } else {
+                    // Document is not ready yet, when CSE element is initialized.
+                    google.setOnLoadCallback(function() {
+                        var thing = google.search.cse.element.getElement('searchInput');
+                        // Render an element with both search box and search results in div with id 'test'.
+                        google.search.cse.element.render(
+                            {
+                                div: "test",
+                                tag: 'search',
+                                gname: 'searchInput'
+                            });
+                        var thing2 = google.search.cse.element.getElement('searchInput');
+                    }, true);
+                }
+            };
+
+            window.__gcse = {
+                parsetags: 'explicit',
+                callback: myCallback
+            };
+
             (function() {
                 var cx = '014533240989500353965:6nvf0b7rp8s';
                 var gcse = document.createElement('script');
@@ -18,7 +50,7 @@
                 var s = document.getElementsByTagName('script')[0];
                 s.parentNode.insertBefore(gcse, s);
 
-
+                var x = window.__gcse;
                 var service_url = 'https://kgsearch.googleapis.com/v1/entities:search';
                 var params = {
                     'query': 'cat',
@@ -34,10 +66,11 @@
 
             })();
 
-
+//            var thing = google.search.cse.element.getElement('searchInput');
         </script>
 
-        <gcse:search></gcse:search>
+        <div class="gcse-searchbox" id="test" data-queryParameterName="search" >
+        <!--<gcse:search data-gname="searchInput"></gcse:search>-->
 
         <!--<script>-->
             <!--var service_url = 'https://kgsearch.googleapis.com/v1/entities:search';-->

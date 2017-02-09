@@ -7,7 +7,8 @@
 
 
   <link rel="stylesheet" href="app.css">
-
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <meta name="google-signin-scope" content="profile email">
   <meta name="google-signin-client_id" content="53820978680-v3lk5hjovj13csrmunrsj9mtvn23kffo.apps.googleusercontent.com">
   <script src="https://apis.google.com/js/platform.js" async defer></script>
@@ -29,23 +30,27 @@
         var id_token = googleUser.getAuthResponse().id_token;
         console.log("ID Token: " + id_token);
 
-        window.location.href = "secure.html";
+        window.location.href = "secure2.html";
     };
 
     function onFailure() {
         console.log("login failure");
     }
 </script>
-<div class="google g-signin2" data-onsuccess="onSignIn" data-onfailure="onFailure" data-theme="dark" data-width="300" data-longtitle="true"></div>
+<div class="container">
+    <div class="jumbotron top-padding-100">
+
+        <h1>Welcome to the Image and Info Search</h1>
+
+        <div class="google g-signin2" id="signIn" data-onsuccess="onSignIn" data-onfailure="onFailure" data-theme="dark" data-width="300" data-longtitle="true"></div>
+
+    </div>
+</div>
 
 
 
 
 
-
-  <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-  -->
 
 
 
