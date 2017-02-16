@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="38dp"
+            android:layout_marginTop="43dp"
+            android:id="@+id/inputSearch"
+            android:hint="Enter a search term" />
+
+        <Button
+            android:text="SEARCH"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/inputSearch"
+            android:layout_toEndOf="@+id/inputSearch"
+            android:layout_marginStart="19dp"
+            android:id="@+id/button"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:onClick="search"/>
+
+        <TextView
+            android:text="Welcome to Google's Knowledge Graph Search!"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:id="@+id/textView3"
+            android:textAppearance="@android:style/TextAppearance.Material.Medium" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/outputText"
+            android:layout_below="@+id/inputSearch"
+            android:layout_alignStart="@+id/inputSearch"
+            android:layout_marginTop="73dp" />
+    </RelativeLayout>
+</LinearLayout>

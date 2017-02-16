@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
         else
         {
             //This code redirects the from login page to the home page.
-            Intent redirect = new Intent(LoginActivity.this, MainActivity.class);
+            Intent redirect = new Intent(LoginActivity.this, KnowledgeActivity.class);
             startActivity(redirect);
         }
 

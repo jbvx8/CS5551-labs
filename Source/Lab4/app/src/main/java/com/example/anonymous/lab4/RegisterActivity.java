@@ -39,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
         boolean validationFlag = false;
         //Verify if the username and password are not empty.
         if(!userName.isEmpty() && !password.isEmpty()) {
-            Intent redirect = new Intent(RegisterActivity.this, MainActivity.class);
+            Intent redirect = new Intent(RegisterActivity.this, KnowledgeActivity.class);
             startActivity(redirect);
         }
         else
