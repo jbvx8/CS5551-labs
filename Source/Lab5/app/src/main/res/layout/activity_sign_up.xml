@@ -94,7 +94,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/signup_photoButton"
         android:layout_below="@+id/signup_imageView"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:onClick="onClickPhoto"/>
 
     <Button
         android:text="OK"

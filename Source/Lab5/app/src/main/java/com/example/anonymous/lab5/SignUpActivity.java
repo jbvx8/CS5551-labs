@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -15,6 +16,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -27,6 +29,7 @@ public class SignUpActivity extends AppCompatActivity {
     EditText first, last, username, password, add;
     LatLng currentCoordinates = null;
     double latitude = 0, longitude = 0;
+    Bitmap image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,15 @@ public class SignUpActivity extends AppCompatActivity {
         password = (EditText) findViewById(R.id.signup_password);
         photo_button = (Button) findViewById(R.id.signup_photoButton);
         ok_button = (Button) findViewById(R.id.signup_Button);
+
+        ImageView imageView = (ImageView) findViewById(R.id.signup_imageView);
+        Intent intent = getIntent();
+        image = intent.getParcelableExtra("Image");
+        if (image != null) {
+            imageView.setImageBitmap(image);
+        } else {
+            imageView.setImageResource(android.R.mipmap.sym_def_app_icon);
+        }
 
         LocationManager currentLocation = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         LocationListener currentLocationListener = new LocationListener() {
@@ -112,8 +124,14 @@ public class SignUpActivity extends AppCompatActivity {
             Intent intent = new Intent(SignUpActivity.this, MapActivity.class);
             double[] coords = {latitude, longitude};
             intent.putExtra("COORDINATES", coords);
+            intent.putExtra("UserImage", image);
             startActivity(intent);
         }
 
+    }
+
+    public void onClickPhoto(View v) {
+        Intent intent = new Intent(SignUpActivity.this, PhotoActivity.class);
+        startActivity(intent);
     }
 }

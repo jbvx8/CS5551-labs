@@ -1,5 +1,7 @@
 package com.example.anonymous.lab5;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.location.Geocoder;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
@@ -37,10 +39,18 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback{
         LatLng coordinates = new LatLng(lat, lng);
         String latlong = lat + ", " + lng;
         try {
-            gMap.addMarker(new MarkerOptions().position(coordinates)
-                    .title(latlong)
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.android)));
-            gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinates, 12));
+            Intent intent = getIntent();
+            Bitmap photo = intent.getParcelableExtra("UserImage");
+            if (photo != null) {
+                gMap.addMarker(new MarkerOptions().position(coordinates)
+                        .title(latlong)
+                        .icon(BitmapDescriptorFactory.fromBitmap(photo)));
+            } else {
+                gMap.addMarker(new MarkerOptions().position(coordinates)
+                        .title(latlong)
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.android)));
+            }
+            gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinates, 14));
         } catch (Exception e) {
             e.printStackTrace();
         }
