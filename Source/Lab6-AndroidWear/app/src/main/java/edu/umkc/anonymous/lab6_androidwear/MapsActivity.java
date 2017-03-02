@@ -16,7 +16,9 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.wearable.view.DismissOverlayView;
 import android.view.View;
@@ -39,6 +41,7 @@ public class MapsActivity extends Activity implements OnMapReadyCallback,
      */
     private GoogleMap mMap;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void onCreate(Bundle savedState) {
         super.onCreate(savedState);
 
@@ -77,6 +80,7 @@ public class MapsActivity extends Activity implements OnMapReadyCallback,
         mDismissOverlay.setIntroText(R.string.intro_text);
         mDismissOverlay.showIntroIfNecessary();
 
+        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
         // Obtain the MapFragment and set the async listener to be notified when the map is ready.
         MapFragment mapFragment =
                 (MapFragment) getFragmentManager().findFragmentById(R.id.map);
@@ -116,8 +120,7 @@ public class MapsActivity extends Activity implements OnMapReadyCallback,
             }
         };
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                != PackageManager.PERMISSION_GRANTED) {
             return;
         }
 
@@ -132,7 +135,7 @@ public class MapsActivity extends Activity implements OnMapReadyCallback,
         mMap.addMarker(new MarkerOptions().position(currentCoordinates)
                 .title(latlong));
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentCoordinates, 16));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentCoordinates, 12));
     }
 
     @Override
