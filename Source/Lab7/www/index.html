@@ -25,21 +25,58 @@
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
+      <script src="js/angular.min.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
-    <script src="cordova.js"></script>
-
+    <script src="js/ng-cordova.min.js"></script>
+      
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+      
+    <!--Firebase -->
+    <script src="js/firebase.js"></script>
+      <script src="js/angularfire.min.js"></script>
+      <script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCxA3iV6RJY-AORDSMJiVNaySvMYmckkb8",
+    authDomain: "lab7-84cf1.firebaseapp.com",
+    databaseURL: "https://lab7-84cf1.firebaseio.com",
+    storageBucket: "lab7-84cf1.appspot.com",
+    messagingSenderId: "983846418216"
+  };
+  firebase.initializeApp(config);
+</script>
+      
+                                                                       
     <!-- your app's js -->
     <script src="js/app.js"></script>
   </head>
   <body ng-app="starter">
 
+<!--
     <ion-pane>
       <ion-header-bar class="bar-stable">
-        <h1 class="title">Ionic Blank Starter</h1>
+        <h1 class="title">Login or Register</h1>
       </ion-header-bar>
       <ion-content>
+          <div id="container" class="text">
+          </div>
+          <div class="text-center">
+              <h2>Welcome!</h2>
+              <a href="login.html" class="btn btn-primary text-center">Login</a>
+              OR 
+              <a href="register.html" class="btn btn-default text-center">Register</a> 
+          </div>
       </ion-content>
     </ion-pane>
+-->
+      
+      <ion-pane>    
+        <ion-nav-bar class="bar-stable"></ion-nav-bar>
+            <ion-nav-view></ion-nav-view>
+        </ion-pane>
   </body>
 </html>
+ 
