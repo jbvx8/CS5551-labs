@@ -100,13 +100,14 @@
 
   <div  ng-controller="View1Ctrl" style="top: 200px">
     <div class="menu" id="div_SearchContainer">
-    <h1 align="absolute" style="text-align: center; color: #1ab188">Search your place of interest!</h1>
-    <input type="text" id="txt_placeName" placeholder="Enter the place you want to search for" style="margin-left: 100px"/>
+    <h1 align="absolute" style="text-align: center; color: #1ab188">Welcome to the City Weather and Mood Finder!</h1>
+      <h2 align="absolute" style="text-align: center; color: #1ab188">Enter a US city you'd like to search</h2>
+    <input type="text" id="txt_placeName" placeholder="Enter City, ST" style="margin-left: 100px"/>
     <button id="btn_getData" ng-click="getData()">Get Data</button>
     </div>
-    <div id="div_Weather">
-      <h2 style="text-align: center; color: #1ab188"> Current Weather </h2>
-      <ul ng-first="city in cityList">
+    <div id="div_Weather" style="display:none">
+      <h2 style="color: #1ab188; margin-left: 100px">   Current Weather (from Weather Underground) </h2>
+      <ul ng-repeat="city in cityList" style="margin-left:100px">
         <li>{{city.time}}</li>
         <li>{{city.weather}}</li>
         <li>Temperature: {{city.temperature}}</li>
@@ -114,8 +115,8 @@
         <li>Wind: {{city.wind}}</li>
       </ul>
 
-      <h2 style="text-align: center; color: #1ab188"> Current City Mood </h2>
-      <ul ng-first="city in cityList">
+      <h2 style="color: #1ab188; margin-left: 100px">   Current City Mood (from Emotional Cities)</h2>
+      <ul ng-repeat="city in cityList" style="margin-left:100px">
         <li>{{city.mood}}</li>
       </ul>
 

@@ -11,8 +11,9 @@ app.get('/getPlace', function (req, res) {
         'city': []
     };
 
-    var location = req.query.near;
-    var url = "http://api.wunderground.com/api/df9758940cfd75a7/conditions/q/" + location + ".json";
+    var location = req.query.city;
+    var state = req.query.state;
+    var url = "http://api.wunderground.com/api/df9758940cfd75a7/conditions/q/" + state + "/" + location + ".json";
 
     request(url, function (error, response, body) {
         //Check for error
@@ -26,16 +27,16 @@ app.get('/getPlace', function (req, res) {
         }
         //All is good. Print the body
         body = JSON.parse(body);
-        var weather = body.response.current_observation;
-        for (var i = 0; i < weather.length; i++) {
+        var weather = body.current_observation;
+        //for (var i = 0; i < weather.length; i++) {
             result.city.push({
-                'time': weather[i].observation_time,
-                'weather': weather[i].weather,
-                'temperature': weather[i].temperature_string,
-                'humidity': weather[i].relative_humidity,
-                'wind': weather[i].wind_string
+                'time': weather.observation_time,
+                'weather': weather.weather,
+                'temperature': weather.temperature_string,
+                'humidity': weather.relative_humidity,
+                'wind': weather.wind_string
             });
-        }
+        //}
     });
     var moodUrl = "http://www.emotionalcities.com/api/getCityMood/" + location + "/2017-03-22/23";
     request(moodUrl, function(error, response, body) {
@@ -49,9 +50,10 @@ app.get('/getPlace', function (req, res) {
             return console.log('Invalid Status Code Returned:', response.statusCode);
         }
         //All is good. Print the body
+        var DOMParser = require('xmldom').DOMParser;
         var parser = new DOMParser();
         body = parser.parseFromString(body, "body/xml");
-        var mood = body.getElementsByTagName("value")[0];
+        var mood = body.getElementsByTagName("value")[0].childNodes[0].nodeValue;
         var moodDescription;
         if (mood == 0) {
             moodDescription = "angry";
@@ -70,14 +72,13 @@ app.get('/getPlace', function (req, res) {
         } else if (mood == 7) {
             moodDescription = "cheerful";
         }
-        result.city.push({'mood': moodDescription});
-    });
-
-
+        result.city[0].mood = moodDescription;
 
         res.contentType('application/json');
         res.write(JSON.stringify(result));
         res.end();
+        console.log(result);
+    });
 
     console.log(result);
 
