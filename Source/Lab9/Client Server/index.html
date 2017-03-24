@@ -11,6 +11,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="app.css">
 
+    <!--bootstrap-->
+  <script
+          src="https://code.jquery.com/jquery-3.2.1.min.js"
+          integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+          crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
   <style>
 
         .menu input{
@@ -93,32 +102,27 @@
     <div class="menu" id="div_SearchContainer">
     <h1 align="absolute" style="text-align: center; color: #1ab188">Search your place of interest!</h1>
     <input type="text" id="txt_placeName" placeholder="Enter the place you want to search for" style="margin-left: 100px"/>
-    <input type="text" id="txt_searchFilter" placeholder="Enter the search query"/>
-    <button id="btn_getReview" ng-click="getVenues()">Get Venues</button>
+    <button id="btn_getData" ng-click="getData()">Get Data</button>
     </div>
-    <div id="div_VenueList">
-      <h2 style="text-align: center; color: #1ab188"> Top Five Picks From FourSquare Review API </h2>
-      <ul>
-       <li ng-repeat="venue in venueList" style="font-size: x-large; color: #5e5e5e; text-align: center; list-style: none; list-style-position:inside;">
-          <a  href="" ng-click="getReviews(venue)" style="font-size: x-large; color: #5e5e5e; text-align: center;">{{venue.name}}</a>
-        </li>
+    <div id="div_Weather">
+      <h2 style="text-align: center; color: #1ab188"> Current Weather </h2>
+      <ul ng-first="city in cityList">
+        <li>{{city.time}}</li>
+        <li>{{city.weather}}</li>
+        <li>Temperature: {{city.temperature}}</li>
+        <li>Relative Humidity: {{city.humidity}}</li>
+        <li>Wind: {{city.wind}}</li>
       </ul>
 
+      <h2 style="text-align: center; color: #1ab188"> Current City Mood </h2>
+      <ul ng-first="city in cityList">
+        <li>{{city.mood}}</li>
+      </ul>
+
+
+
     </div>
-    <div id="div_ReviewList" style="display:none;"  >
 
-
-          <p ng-model="ReviewWithSentiment">
-
-            <TABLE BORDER=2 CELLPADDING=4 ng-show="showt"> <TR> <TH style="color: aliceblue; background:#1ab188" COLSPAN=2>Sentiment Analysis From Using Alchemy API </TH> </TR>
-                <TR> <TD>Most recent review</TD> <TD>{{ReviewWithSentiment.reviewText}}</TD> </TR>
-                <TR> <TD>Sentiment of the review</TD> <TD>{{ReviewWithSentiment.sentiment}}</TD> </TR>
-                <TR> <TD>Sentiment Score of the review</TD> <TD>{{ReviewWithSentiment.score}}</TD> </TR>
-                <TR> <TH style="color: aliceblue; background:#1ab188" COLSPAN=2 BGCOLOR="#445553">{{ReviewWithSentiment.reviewText}}</TH> </TR>
-            </TABLE>
-            <span ng-show="shows" style="text-align: center;">{{noText}}</span>
-          </p>
-	</div>
   </div>
 
 
@@ -126,7 +130,7 @@
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
-  <script src="app.js"></script>
+  <script src="../Rest%20Service/app.js"></script>
 
 
 </body>
